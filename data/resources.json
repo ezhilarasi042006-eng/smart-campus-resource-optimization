@@ -1,0 +1,122 @@
+[
+  {
+    "id": "RES-001",
+    "name": "Smart Classroom A204",
+    "category": "Classroom",
+    "location": "Academic Block A \u00b7 Floor 2",
+    "capacity": 60,
+    "utilization": 86,
+    "status": "Available",
+    "description": "Smart teaching room with interactive display, lecture capture, and hybrid-learning equipment.",
+    "features": [
+      "Interactive display",
+      "Lecture capture",
+      "Hybrid learning"
+    ]
+  },
+  {
+    "id": "RES-002",
+    "name": "Innovation Laboratory",
+    "category": "Laboratory",
+    "location": "Innovation Centre \u00b7 Floor 1",
+    "capacity": 32,
+    "utilization": 34,
+    "status": "Available",
+    "description": "Flexible prototyping lab for design thinking, electronics, and student innovation projects.",
+    "features": [
+      "Workbenches",
+      "Prototyping tools",
+      "Projector"
+    ]
+  },
+  {
+    "id": "RES-003",
+    "name": "Seminar Hall",
+    "category": "Seminar Hall",
+    "location": "Main Block \u00b7 Ground Floor",
+    "capacity": 180,
+    "utilization": 78,
+    "status": "Available",
+    "description": "Large presentation venue for guest lectures, seminars, and academic events.",
+    "features": [
+      "180-seat layout",
+      "PA system",
+      "Stage and projector"
+    ]
+  },
+  {
+    "id": "RES-004",
+    "name": "Robotics Laboratory",
+    "category": "Laboratory",
+    "location": "Engineering Block C \u00b7 Floor 1",
+    "capacity": 28,
+    "utilization": 92,
+    "status": "Available",
+    "description": "Robotics and automation lab equipped for supervised practical sessions and team projects.",
+    "features": [
+      "Robotics kits",
+      "Safety stations",
+      "Workbenches"
+    ]
+  },
+  {
+    "id": "RES-005",
+    "name": "Collaboration Room",
+    "category": "Meeting Room",
+    "location": "Library Annex \u00b7 Floor 2",
+    "capacity": 12,
+    "utilization": 48,
+    "status": "Available",
+    "description": "Small team room for project meetings, peer learning, and mentoring sessions.",
+    "features": [
+      "Whiteboard",
+      "Video conferencing",
+      "Flexible seating"
+    ]
+  },
+  {
+    "id": "RES-006",
+    "name": "Portable Projector Kit",
+    "category": "Equipment",
+    "location": "Central IT Store \u00b7 Counter 1",
+    "capacity": 1,
+    "utilization": 27,
+    "status": "Available",
+    "description": "Portable projector kit available for approved classroom and event bookings.",
+    "features": [
+      "Portable projector",
+      "HDMI adapter",
+      "Carry case"
+    ]
+  },
+  {
+    "id": "RES-007",
+    "name": "Data Science Lab",
+    "category": "Laboratory",
+    "location": "Academic Block B \u00b7 Floor 3",
+    "capacity": 40,
+    "utilization": 66,
+    "status": "Available",
+    "description": "Computer laboratory for data analytics, programming, and AI practical sessions.",
+    "features": [
+      "40 workstations",
+      "Development tools",
+      "Network access"
+    ]
+  },
+  {
+    "id": "RES-008",
+    "name": "Boardroom B12",
+    "category": "Meeting Room",
+    "location": "Administration Block \u00b7 Floor 1",
+    "capacity": 16,
+    "utilization": 22,
+    "status": "Available",
+    "description": "Quiet meeting room for faculty committees, planning, and project reviews.",
+    "features": [
+      "Conference display",
+      "Video calls",
+      "Conference table"
+    ]
+  }
+]

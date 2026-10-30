@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101b35">
+  <meta name="description" content="Smart campus resource management, reservations and explainable utilization analytics.">
+  <title>CampusIQ · Smart Campus Resource Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="CampusIQ home">
+        <span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 13.5 16 5l12 8.5v13H4z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M11 26V16h10v10M8 13h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></span>
+        <span><strong>Campus<span>IQ</span></strong><small>RESOURCE INTELLIGENCE</small></span>
+      </a>
+      <div class="nav-caption">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="overview"><span class="nav-icon">◫</span>Overview</button>
+        <button class="nav-item" data-view="resources"><span class="nav-icon">▦</span>Resources <span class="nav-count" id="resourceNavCount">8</span></button>
+        <button class="nav-item" data-view="bookings"><span class="nav-icon">▣</span>Bookings</button>
+        <button class="nav-item" data-view="analytics"><span class="nav-icon">▥</span>Analytics</button>
+        <button class="nav-item" data-view="insights"><span class="nav-icon">✧</span>AI Insights <span class="nav-dot"></span></button>
+      </nav>
+      <div class="nav-caption nav-caption-lower">PREFERENCES</div>
+      <nav class="side-nav">
+        <button class="nav-item" data-view="settings"><span class="nav-icon">⚙</span>Settings</button>
+      </nav>
+      <div class="sidebar-spacer"></div>
+      <div class="sidebar-help">
+        <div class="help-orb">✦</div>
+        <strong>Optimize your campus</strong>
+        <p>Use utilization insights to make every space count.</p>
+        <button id="viewInsightsBtn">Explore insights <span>↗</span></button>
+      </div>
+      <div class="sidebar-footer"><span class="online-dot"></span> All systems operational <span class="version">v1.0</span></div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Open navigation">☰</button>
+        <div class="breadcrumb"><span>Workspace</span><span class="crumb-slash">/</span><strong id="pageCrumb">Overview</strong></div>
+        <div class="topbar-actions">
+          <span class="system-pill"><span class="online-dot"></span> System live</span>
+          <button class="icon-button notification-button" id="notificationBtn" aria-label="Notifications">♧<i></i></button>
+          <div class="profile">
+            <div class="avatar">AD</div>
+            <div class="profile-copy"><strong>Campus Admin</strong><small>Administrator</small></div>
+            <span class="profile-chevron">⌄</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <section class="view active" id="view-overview">
+          <div class="welcome-row">
+            <div><div class="eyebrow"><span class="eyebrow-line"></span> CAMPUS OPERATIONS / 2026</div><h1>Good afternoon, Admin <span class="wave">✳</span></h1><p class="page-subtitle">Here’s what’s happening across your campus today.</p></div>
+            <button class="primary-button" id="newBookingBtn"><span class="button-plus">＋</span> New booking</button>
+          </div>
+          <div class="metric-grid">
+            <article class="metric-card"><div class="metric-top"><span>Total resources</span><span class="metric-icon icon-violet">▦</span></div><div class="metric-value" id="totalResources">—</div><div class="metric-bottom"><span class="metric-note">Across campus</span><span class="metric-tag neutral-tag">Inventory</span></div></article>
+            <article class="metric-card"><div class="metric-top"><span>Average utilization</span><span class="metric-icon icon-blue">◔</span></div><div class="metric-value"><span id="averageUtilization">—</span><small>%</small></div><div class="metric-bottom"><span class="metric-note">Based on resource profile</span><span class="metric-tag blue-tag">Campus-wide</span></div></article>
+            <article class="metric-card"><div class="metric-top"><span>Active bookings</span><span class="metric-icon icon-green">▣</span></div><div class="metric-value" id="activeBookings">—</div><div class="metric-bottom"><span class="metric-note">Confirmed and upcoming</span><span class="metric-tag green-tag">Live records</span></div></article>
+            <article class="metric-card"><div class="metric-top"><span>Need optimization</span><span class="metric-icon icon-orange">↗</span></div><div class="metric-value" id="optimizationCount">—</div><div class="metric-bottom"><span class="metric-note">High demand or low use</span><span class="metric-tag orange-tag">Action needed</span></div></article>
+          </div>
+
+          <div class="dashboard-grid">
+            <section class="panel utilization-panel">
+              <div class="panel-heading"><div><h2>Resource utilization</h2><p>Campus-wide utilization at a glance</p></div><button class="subtle-button" data-navigate="analytics">View analytics <span>↗</span></button></div>
+              <div class="chart-summary"><div><span class="chart-big-number" id="chartAverage">—%</span><span class="chart-caption">Average utilization</span></div><div class="chart-legend"><span><i class="legend-dot legend-high"></i>High ≥ 80%</span><span><i class="legend-dot legend-mid"></i>Balanced 40–79%</span><span><i class="legend-dot legend-low"></i>Low &lt; 40%</span></div></div>
+              <div class="chart-wrap"><canvas id="utilizationChart" aria-label="Bar chart comparing resource utilization" role="img"></canvas></div>
+            </section>
+            <section class="panel insight-preview">
+              <div class="panel-heading"><div><div class="section-kicker"><span>✧</span> INTELLIGENCE</div><h2>AI recommendations</h2><p>Rule-based, explainable insights</p></div><span class="sparkle-badge">✦</span></div>
+              <div id="insightPreviewList" class="insight-list"><div class="loading-line">Generating recommendations…</div></div>
+              <button class="wide-link-button" data-navigate="insights">View all recommendations <span>→</span></button>
+            </section>
+          </div>
+
+          <section class="panel inventory-panel">
+            <div class="panel-heading inventory-heading"><div><h2>Campus resource inventory</h2><p>Explore spaces and shared equipment</p></div><button class="subtle-button" data-navigate="resources">View all resources <span>↗</span></button></div>
+            <div class="filter-row"><label class="search-box"><span>⌕</span><input type="search" id="resourceSearch" placeholder="Search resources, locations…" aria-label="Search resources"></label><select id="categoryFilter" aria-label="Filter resource category"><option value="all">All categories</option><option>Classroom</option><option>Laboratory</option><option>Seminar Hall</option><option>Meeting Room</option><option>Equipment</option></select><span class="results-count" id="resourceResultsCount">8 resources</span></div>
+            <div class="resource-grid" id="resourceGrid"><div class="loading-card">Loading campus resources…</div></div>
+          </section>
+          <section class="panel bookings-preview-panel">
+            <div class="panel-heading"><div><h2>Recent bookings</h2><p>Latest campus reservations</p></div><button class="subtle-button" data-navigate="bookings">Manage bookings <span>↗</span></button></div>
+            <div class="table-wrap"><table><thead><tr><th>RESOURCE</th><th>BOOKED BY</th><th>DATE & TIME</th><th>STATUS</th><th></th></tr></thead><tbody id="recentBookingsBody"><tr><td colspan="5" class="empty-cell">Loading bookings…</td></tr></tbody></table></div>
+          </section>
+        </section>
+
+        <section class="view" id="view-resources">
+          <div class="view-heading"><div><div class="eyebrow">CAMPUS DIRECTORY</div><h1>Resource inventory</h1><p class="page-subtitle">Find spaces and equipment, compare utilization, and start a reservation.</p></div><button class="primary-button" id="resourcesNewBooking"><span class="button-plus">＋</span> New booking</button></div>
+          <section class="panel"><div class="filter-row resource-page-filters"><label class="search-box"><span>⌕</span><input type="search" id="resourceSearchPage" placeholder="Search by name, ID or location…"></label><select id="categoryFilterPage"><option value="all">All categories</option><option>Classroom</option><option>Laboratory</option><option>Seminar Hall</option><option>Meeting Room</option><option>Equipment</option></select></div><div class="resource-grid" id="resourceGridPage"></div></section>
+        </section>
+
+        <section class="view" id="view-bookings">
+          <div class="view-heading"><div><div class="eyebrow">SCHEDULING CENTER</div><h1>Bookings & reservations</h1><p class="page-subtitle">Manage reservations and keep resource schedules conflict-free.</p></div><button class="primary-button" id="bookingsNewBooking"><span class="button-plus">＋</span> New booking</button></div>
+          <div class="booking-summary-row"><div class="mini-stat"><span class="mini-stat-icon">▣</span><div><small>Total records</small><strong id="bookingTotal">—</strong></div></div><div class="mini-stat"><span class="mini-stat-icon mini-green">✓</span><div><small>Confirmed</small><strong id="bookingConfirmed">—</strong></div></div><div class="mini-stat"><span class="mini-stat-icon mini-grey">↶</span><div><small>Cancelled</small><strong id="bookingCancelled">—</strong></div></div></div>
+          <section class="panel"><div class="panel-heading"><div><h2>All reservations</h2><p>Booking history and current status</p></div><select id="bookingStatusFilter" class="compact-select"><option value="all">All statuses</option><option value="Confirmed">Confirmed</option><option value="Cancelled">Cancelled</option></select></div><div class="table-wrap"><table class="bookings-table"><thead><tr><th>BOOKING ID</th><th>RESOURCE</th><th>BOOKED BY</th><th>DATE & TIME</th><th>STATUS</th><th>ACTION</th></tr></thead><tbody id="allBookingsBody"></tbody></table></div></section>
+        </section>
+
+        <section class="view" id="view-analytics">
+          <div class="view-heading"><div><div class="eyebrow">PERFORMANCE CENTER</div><h1>Campus analytics</h1><p class="page-subtitle">Understand utilization patterns and identify opportunities for better allocation.</p></div><span class="data-badge"><span class="online-dot"></span> Sample profile data</span></div>
+          <div class="metric-grid analytics-metrics"><article class="metric-card"><div class="metric-top"><span>Average utilization</span><span class="metric-icon icon-blue">◔</span></div><div class="metric-value"><span id="analyticsAverage">—</span><small>%</small></div><div class="metric-bottom"><span class="metric-note">Across all resources</span></div></article><article class="metric-card"><div class="metric-top"><span>High-demand resources</span><span class="metric-icon icon-orange">↗</span></div><div class="metric-value" id="analyticsHigh">—</div><div class="metric-bottom"><span class="metric-note">Utilization ≥ 80%</span></div></article><article class="metric-card"><div class="metric-top"><span>Underutilized resources</span><span class="metric-icon icon-green">⌄</span></div><div class="metric-value" id="analyticsLow">—</div><div class="metric-bottom"><span class="metric-note">Utilization &lt; 40%</span></div></article></div>
+          <div class="dashboard-grid analytics-grid"><section class="panel"><div class="panel-heading"><div><h2>Utilization by resource</h2><p>Compare current utilization profile</p></div></div><div class="large-chart-wrap"><canvas id="analyticsChart" aria-label="Detailed resource utilization chart" role="img"></canvas></div></section><section class="panel"><div class="panel-heading"><div><h2>Utilization distribution</h2><p>Resources by utilization band</p></div></div><div class="distribution" id="distributionBars"></div><div class="method-note"><strong>How to read this</strong><p>High demand is 80% or above. Balanced use is 40–79%. Underutilized is below 40%.</p></div></section></div>
+          <section class="panel"><div class="panel-heading"><div><h2>Resource performance detail</h2><p>Utilization and capacity overview</p></div></div><div class="table-wrap"><table><thead><tr><th>RESOURCE</th><th>CATEGORY</th><th>CAPACITY</th><th>UTILIZATION</th><th>INDICATOR</th></tr></thead><tbody id="analyticsTableBody"></tbody></table></div></section>
+        </section>
+
+        <section class="view" id="view-insights">
+          <div class="view-heading"><div><div class="eyebrow">DECISION SUPPORT</div><h1>AI insights & recommendations</h1><p class="page-subtitle">Actionable recommendations with transparent rules and traceable reasoning.</p></div><span class="ai-status"><span>✧</span> Explainable engine active</span></div>
+          <div class="notice-banner"><span class="notice-icon">ⓘ</span><div><strong>Prototype transparency</strong><p>This academic version uses explainable rule-based logic, not a trained machine-learning model. Utilization values are sample profile data and should be replaced with measured campus data for operational decisions.</p></div></div>
+          <div class="insight-stats" id="insightStats"></div>
+          <div class="recommendation-grid" id="allInsightsList"></div>
+          <section class="panel"><div class="panel-heading"><div><h2>Optimization playbook</h2><p>A practical sequence for campus administrators</p></div></div><div class="playbook-grid"><article><span>01</span><h3>Validate demand</h3><p>Compare these profile indicators with actual booking hours, attendance, and timetable data.</p></article><article><span>02</span><h3>Match requirements</h3><p>Check capacity, equipment, accessibility, and safety before moving an activity to another space.</p></article><article><span>03</span><h3>Measure outcomes</h3><p>Review utilization weekly and track whether reallocation reduces congestion without creating new bottlenecks.</p></article></div></section>
+        </section>
+
+        <section class="view" id="view-settings">
+          <div class="view-heading"><div><div class="eyebrow">SYSTEM PREFERENCES</div><h1>Settings</h1><p class="page-subtitle">Application configuration and project information.</p></div></div>
+          <section class="panel settings-panel"><div class="settings-row"><div class="settings-symbol">⌘</div><div class="settings-text"><h3>CampusIQ application</h3><p>Local-first resource management with a REST API backend.</p></div><span class="settings-value">Version 1.0.0</span></div><div class="settings-row"><div class="settings-symbol">◈</div><div class="settings-text"><h3>Storage mode</h3><p>JSON files are stored in the project’s data folder. Back up this folder regularly.</p></div><span class="settings-value status-text">Local JSON</span></div><div class="settings-row"><div class="settings-symbol">✧</div><div class="settings-text"><h3>Recommendation engine</h3><p>Rule-based thresholds: high demand ≥ 80%, underutilized &lt; 40%.</p></div><span class="settings-value status-text">Enabled</span></div><div class="settings-row"><div class="settings-symbol">⌁</div><div class="settings-text"><h3>API health</h3><p id="apiHealthText">Checking connection…</p></div><span class="settings-value status-text" id="apiHealthBadge">Checking</span></div><div class="settings-row"><div class="settings-symbol">↗</div><div class="settings-text"><h3>Data disclaimer</h3><p>Sample utilization percentages are illustrative. Confirm real schedules and permissions before real-world use.</p></div><span class="settings-value">Academic prototype</span></div></section>
+        </section>
+      </div>
+      <footer class="app-footer"><span>© 2026 CampusIQ · Smart Campus Resource Intelligence</span><span>Built for academic demonstration <span class="footer-heart">◆</span></span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle" hidden>
+    <div class="modal-card">
+      <div class="modal-header"><div><div class="eyebrow">RESERVATION WORKFLOW</div><h2 id="bookingModalTitle">Create a new booking</h2><p>Reserve a campus resource for your activity.</p></div><button class="modal-close" id="closeBookingModal" aria-label="Close dialog">×</button></div>
+      <form id="bookingForm">
+        <div class="form-grid"><label class="form-field full-field"><span>Campus resource <b>*</b></span><select id="bookingResource" name="resourceId" required><option value="">Choose a resource…</option></select><small>Choose a space or shared equipment.</small></label>
+          <label class="form-field"><span>Full name <b>*</b></span><input name="bookerName" maxlength="100" required placeholder="e.g. Priya Sharma"></label>
+          <label class="form-field"><span>Email address <b>*</b></span><input name="email" type="email" required placeholder="you@college.edu"></label>
+          <label class="form-field"><span>Start date & time <b>*</b></span><input id="bookingStart" name="start" type="datetime-local" required></label>
+          <label class="form-field"><span>End date & time <b>*</b></span><input id="bookingEnd" name="end" type="datetime-local" required></label>
+          <label class="form-field full-field"><span>Booking purpose <b>*</b></span><textarea name="purpose" maxlength="240" rows="3" required placeholder="Briefly describe the class, event or activity…"></textarea><small>Maximum 240 characters.</small></label>
+        </div>
+        <div class="form-hint"><span>ⓘ</span> Reservations are checked for overlapping confirmed bookings before they are saved.</div>
+        <div class="form-error" id="bookingFormError" role="alert" hidden></div>
+        <div class="modal-actions"><button type="button" class="secondary-button" id="cancelBookingModal">Cancel</button><button type="submit" class="primary-button" id="submitBookingBtn">Confirm booking <span>→</span></button></div>
+      </form>
+    </div>
+  </div>
+  <div class="modal-backdrop" id="resourceModal" role="dialog" aria-modal="true" aria-labelledby="resourceModalTitle" hidden><div class="modal-card resource-detail-card"><div class="modal-header"><div><div class="eyebrow">RESOURCE PROFILE</div><h2 id="resourceModalTitle">Resource details</h2></div><button class="modal-close" id="closeResourceModal" aria-label="Close dialog">×</button></div><div id="resourceModalContent"></div><div class="modal-actions"><button class="secondary-button" id="closeResourceDetails">Close</button><button class="primary-button" id="bookThisResource">Book this resource →</button></div></div></div>
+  <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+  <script src="/app.js"></script>
+</body>
+</html>

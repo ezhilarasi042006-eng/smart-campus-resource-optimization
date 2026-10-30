@@ -1,0 +1,38 @@
+[
+  {
+    "id": "BK-20261030-A1B2C",
+    "resourceId": "RES-001",
+    "resourceName": "Smart Classroom A204",
+    "bookerName": "Dr. Meera Krishnan",
+    "email": "meera.krishnan@example.edu",
+    "start": "2026-11-02T09:00",
+    "end": "2026-11-02T10:30",
+    "purpose": "AI & Data Science lecture",
+    "status": "Confirmed",
+    "createdAt": "2026-10-28T08:15:00.000Z"
+  },
+  {
+    "id": "BK-20261030-D3E4F",
+    "resourceId": "RES-003",
+    "resourceName": "Seminar Hall",
+    "bookerName": "Campus Events Team",
+    "email": "events@example.edu",
+    "start": "2026-11-03T14:00",
+    "end": "2026-11-03T16:00",
+    "purpose": "Industry guest talk",
+    "status": "Confirmed",
+    "createdAt": "2026-10-29T11:40:00.000Z"
+  },
+  {
+    "id": "BK-20261030-G5H6J",
+    "resourceId": "RES-005",
+    "resourceName": "Collaboration Room",
+    "bookerName": "Arun Kumar",
+    "email": "arun.kumar@example.edu",
+    "start": "2026-11-04T11:00",
+    "end": "2026-11-04T12:00",
+    "purpose": "Capstone project review",
+    "status": "Confirmed",
+    "createdAt": "2026-10-30T07:20:00.000Z"
+  }
+]
